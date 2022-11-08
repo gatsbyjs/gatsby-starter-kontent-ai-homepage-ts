@@ -1,22 +1,16 @@
 import * as React from "react"
-import Header from "./header"
-import Footer from "./footer"
-import Head from "./head"
 import "../styles.css"
-
+import { Slice } from "gatsby"
 interface LayoutProps {
-  title: string
-  description?: string
-  image?: { id: string; url: string }
+  children?: React.ReactNode
 }
 
-const Layout: React.FC<LayoutProps> = (props) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Head {...props} />
-      <Header />
-      {props.children}
-      <Footer />
+      <Slice alias="header" />
+      {children}
+      <Slice alias="footer" />
     </>
   )
 }

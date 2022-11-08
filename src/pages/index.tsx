@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import * as sections from "../components/sections"
 import Fallback from "../components/fallback"
+import SEOHead from "../components/head"
 
 interface HomepageProps {
   data: {
@@ -20,7 +21,7 @@ export default function Homepage(props: HomepageProps) {
   const { homepage } = props.data
 
   return (
-    <Layout {...homepage}>
+    <Layout>
       {homepage.blocks.map((block) => {
         const { id, blocktype, ...componentProps } = block
         const Component = sections[blocktype] || Fallback
@@ -29,7 +30,10 @@ export default function Homepage(props: HomepageProps) {
     </Layout>
   )
 }
-
+export const Head = (props: HomepageProps) => {
+  const { homepage } = props.data
+  return <SEOHead {...homepage} />
+}
 export const query = graphql`
   {
     homepage {
